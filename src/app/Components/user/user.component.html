@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks Example</title>
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown i {
+        cursor: pointer;
+    }
+
+    .header-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-inline input {
+        width: 200px;
+    }
+
+    .form-inline {
+        position: relative;
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999; 
+    }
+
+    .form-control {
+        padding-right: 35px; 
+    }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+               
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col"><input type="checkbox"></th>
+                            <th scope="col">Assigned To</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of userList">
+                            <td><input type="checkbox"></td>
+                            <td>{{item.assignedTo}}</td>
+                            <td>{{item.status}}</td>
+                            <td>{{item.dueDate | date:'yyyy-MM-dd'}}</td>
+                            <td>{{item.priority}}</td>
+                            <td>{{item.comments}}</td>
+                            <td class="text-center">
+                                <a [routerLink]="['/task-form', item.id]" class="fa fa-edit text-primary"></a>
+                                <i class="fa fa-trash text-danger" (click)="onDelete(item.id)"></i>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>Showing {{ userList.length }} records</div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination mb-0">
+                            <li class="page-item"><a class="page-link" href="#">First</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Last</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</body>
+</html>
